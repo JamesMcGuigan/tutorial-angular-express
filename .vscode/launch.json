@@ -3,6 +3,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "express",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/server/index.js",
+      "url": "http://localhost:3000/"
+    },
+    {
       "name": "ng serve",
       "type": "pwa-chrome",
       "request": "launch",
