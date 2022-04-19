@@ -1,4 +1,4 @@
-// DEBUG=express:* node ./server.js 
+// DEBUG=express:* node ./server/index.js 
 // DOCS: https://angular.io/guide/build#proxying-to-a-backend-server
 
 const express     = require('express');
