@@ -1,16 +1,9 @@
 // Source: https://github.com/JamesMcGuigan/liatandco.com/blob/master/Server.js
-process.argv.forEach(function (value, index, array) {
-    if( value.match(/^NODE_ENV=/)   ) { process.env.NODE_ENV   = value.replace(/^NODE_ENV=/,   ''); }
-    if( value.match(/^PORT_HTTP=/)  ) { process.env.PORT_HTTP  = value.replace(/^PORT_HTTP=/,  ''); }
-    if( value.match(/^PORT_HTTPS=/) ) { process.env.PORT_HTTPS = value.replace(/^PORT_HTTPS=/, ''); }
-});
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
-
 const fs           = require('fs');
 const morgan       = require('morgan');
 const path         = require('path');
 const errorHandler = require('express-error-handler');
-const config       = require('./config.js')[process.env.NODE_ENV];
+const config       = require('./config.js');
 
 // $ mkdir ./logs/
 function createLogDirectory() {
@@ -29,7 +22,8 @@ function createLogDirectory() {
 module.exports = function(app) {
     createLogDirectory();
     let access_log_stream = fs.createWriteStream(config.access_log, {flags: 'a'});
-    let error_log_stream  = fs.createWriteStream(config.error_log,  {flags: 'a'});
+    // let error_log_stream  = fs.createWriteStream(config.error_log,  {flags: 'a'});
+    // let debug_log_stream  = fs.createWriteStream(config.debug_log,  {flags: 'a'});
 
     // Logging
     if( ["staging","production"].indexOf(process.env.NODE_ENV) != -1 ) {
